@@ -8,10 +8,10 @@ export const DEFAULT_FILTERS = 'f_auto';
 export default Ember.Mixin.create({
   /** @type {String} */
   namespace: '',
-  /** @type {String} */
-  width: 'auto',
-  /** @type {String} */
-  height: 'auto',
+  /** @type {String|Null} Null to prevent 0 value in HTML attribute */
+  width: null,
+  /** @type {String|Null} Null to prevent 0 value in HTML attribute */
+  height: null,
   /** @type {String|Number} */
   h: 0,
   /** @type {String|Number} */

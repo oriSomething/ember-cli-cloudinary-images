@@ -93,3 +93,28 @@ test('alt applied to the DOM', function(assert) {
 
   assert.equal($component.attr('alt'), 'this is alt');
 });
+
+test('width and height applied to the DOM', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject();
+  component.setProperties({
+    width: '100',
+    height: '200'
+  });
+
+  var $component = this.render();
+
+  assert.equal($component.attr('width'), '100');
+  assert.equal($component.attr('height'), '200');
+});
+
+test('width and height not applied to the DOM when empty', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject();
+  var $component = this.render();
+
+  assert.equal($component.attr('width'), undefined);
+  assert.equal($component.attr('height'), undefined);
+});
