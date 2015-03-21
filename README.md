@@ -14,27 +14,28 @@ The way it can be used:
 
 ```handlebars
 It will automatically resolve to the right image URL
-{{c-img namespace='happysale' media='cdn/common/logo'}}
+{{c-img account='happysale' media='cdn/common/logo'}}
 
 For resized image, use `w` for width and `h` for height
-{{c-img namespace='happysale' w='100' media='cdn/common/logo'}}
+{{c-img account='happysale' w='100' media='cdn/common/logo'}}
 
 For using filters, use the filters attribute
-{{c-img namespace='happysale' filters='c_fill' media='cdn/common/logo'}}
+{{c-img account='happysale' filters='c_fill' media='cdn/common/logo'}}
 ```
 
 For getting user profile image use `{{c-avatar}}` component:
 
 ```handlebars
-{{c-avatar namespace='happysale' network='twitter_name' user='iamdevloper'}}
+{{c-avatar account='happysale' network='twitter_name' user='iamdevloper'}}
 ```
 
 Because usually there is only one Cloudinary account in used, you can create `initializer` for that:
+
 ```javascript
-import CloudinaryImageMixin from 'ember-cli-cloudinary-images/mixins/cloudinary-image';
+import CImg from 'ember-cli-cloudinary-images/components/c-img';
 
 export function initialize() {
-  CloudinaryImageMixin.reopen({ namespace: 'happysale' });
+  CImg.reopen({ account: 'happysale' });
 }
 
 export default {
