@@ -17,10 +17,7 @@ test('allFilters identical to filters', function(assert) {
 
   subject.set('filters', 'fl_progressive,c_fill');
 
-  Ember.run(function() {
-    console.log(subject.get('allFilters'));
-    assert.equal(subject.get('allFilters'), 'fl_progressive,c_fill');
-  });
+  assert.equal(subject.get('allFilters'), 'fl_progressive,c_fill');
 });
 
 test('allFilters can handle array filters', function(assert) {
