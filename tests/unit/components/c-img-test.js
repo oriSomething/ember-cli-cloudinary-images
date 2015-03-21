@@ -18,12 +18,43 @@ test('it renders', function(assert) {
   assert.equal(component._state, 'inDOM');
 });
 
+test('allFilters identical to filters', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.set('filters', 'fl_progressive,c_fill');
+
+  assert.equal(component.get('allFilters'), 'fl_progressive,c_fill');
+});
+
+test('allFilters can handle array filters', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.set('filters', ['c_fill' , 'fl_progressive']);
+
+  assert.equal(component.get('allFilters'), 'c_fill,fl_progressive');
+});
+
+test('allFilters includes w and h', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.setProperties({
+    filters: 'fl_progressive',
+    w: 100,
+    h: 50
+  });
+
+  assert.equal(component.get('allFilters'), 'fl_progressive,w_100,h_50');
+});
+
 test('src has correct result without filters', function(assert) {
   assert.expect(1);
 
   var component = this.subject();
   component.setProperties({
-    namespace: 'happysale',
+    account: 'happysale',
     media: 'cdn/common/logo',
     filters: ''
   });
@@ -36,7 +67,7 @@ test('src has correct result with filters', function(assert) {
 
   var component = this.subject();
   component.setProperties({
-    namespace: 'happysale',
+    account: 'happysale',
     media: 'cdn/common/logo',
     filters: 'f_auto'
   });
@@ -44,25 +75,33 @@ test('src has correct result with filters', function(assert) {
   assert.equal(component.get('src'), '//res.cloudinary.com/happysale/image/upload/f_auto/cdn/common/logo');
 });
 
-test('src in null when namespace or media is empty', function(assert) {
-  assert.expect(2);
+test('src in null when account or namespace or media is empty', function(assert) {
+  assert.expect(3);
 
   var component = this.subject();
 
   /** Test #1 */
   component.setProperties({
-    namespace: '',
-    media: 'cdn/common/logo',
+    account: '',
+    namespace: 'upload',
+    media: 'cdn/common/logo'
   });
-
   assert.equal(component.get('src'), null);
 
   /** Test #2 */
   component.setProperties({
-    namespace: 'happysale',
-    media: '',
+    account: 'happysale',
+    namespace: '',
+    media: 'cdn/common/logo'
   });
+  assert.equal(component.get('src'), null);
 
+  /** Test #3 */
+  component.setProperties({
+    account: 'happysale',
+    namespace: 'upload',
+    media: ''
+  });
   assert.equal(component.get('src'), null);
 });
 
@@ -71,7 +110,7 @@ test('src applied to the DOM', function(assert) {
 
   var component = this.subject();
   component.setProperties({
-    namespace: 'happysale',
+    account: 'happysale',
     media: 'cdn/common/logo',
     filters: 'f_auto'
   });

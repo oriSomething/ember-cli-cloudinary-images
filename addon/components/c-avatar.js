@@ -1,45 +1,39 @@
 import Ember from 'ember';
-import layout from '../templates/components/c-img';
-import CloudinaryImageMixin from '../mixins/cloudinary-image';
-const { computed, isEmpty } = Ember;
+import layout from '../templates/components/c-avatar';
+import CImg from './c-img';
+const { computed } = Ember;
 
 /** @type {Ember.Component} */
-export default Ember.Component.extend(CloudinaryImageMixin, {
+export default CImg.extend({
   layout: layout,
-  attributeBindings: ['width', 'height', 'src', 'alt'],
-  tagName: 'img',
 
   /**
-   * @param namespace
+   * The source of image. Override parent's.
+   * Used for choosing social network.
+   *
+   * @property
    * @type {String}
-   * @public
+   * @override
    */
-
-  /**
-   * @param allFilters
-   * @type {String}
-   * @public
-   */
+  namespace: '',
 
   /** @type {String} "facebook" / "gplus" / "twitter" / "twitter_name" */
-  network: '',
+  network: computed.alias('namespace'),
   /** @type {String} User id in network */
-  user: '',
-
-  /** @type {String} */
-  src: computed('namespace', 'network', 'user', 'allFilters', function() {
-    const {
-      namespace,
-      network,
-      user,
-      allFilters
-    } = this.getProperties('namespace', 'network', 'user', 'allFilters');
-
-    /** Makes sure that unneeded request won't be happened */
-    if (isEmpty(namespace) || isEmpty(network) || isEmpty(user)) {
-      return null;
+  user: computed.alias('media'),
+  /** @type {Array} User id in network */
+  profile: computed('network', 'user', function(key, value) {
+    /** Setter */
+    if (Ember.isArray(value)) {
+      this.setProperties({
+        network: value[0],
+        user: value[1]
+      });
     }
 
-    return `//res.cloudinary.com/${namespace}/image/${network}/${allFilters}${allFilters ? '/' : ''}${user}`;
+    /** Getter */
+    let { network, user } = this.getProperties('network', 'user');
+
+    return Ember.A([network, user]);
   })
 });

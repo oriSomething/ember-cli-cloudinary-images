@@ -18,117 +18,44 @@ test('it renders', function(assert) {
   assert.equal(component._state, 'inDOM');
 });
 
-test('src has correct result without filters', function(assert) {
+test('network is alias of namespace', function(assert) {
   assert.expect(1);
 
   var component = this.subject();
-  component.setProperties({
-    namespace: 'happysale',
-    network: 'facebook',
-    user: 'hipster.hacker',
-    filters: ''
-  });
+  component.set('network', 'bestest_network');
 
-  assert.equal(component.get('src'), '//res.cloudinary.com/happysale/image/facebook/hipster.hacker');
+  assert.equal(component.get('namespace'), 'bestest_network');
 });
 
-test('src has correct result with filters', function(assert) {
+test('user is alias of media', function(assert) {
   assert.expect(1);
 
   var component = this.subject();
-  component.setProperties({
-    namespace: 'happysale',
-    network: 'twitter_name',
-    user: 'iamdevloper',
-    filters: 'f_auto'
-  });
+  component.set('user', 'bestest_user');
 
-  assert.equal(component.get('src'), '//res.cloudinary.com/happysale/image/twitter_name/f_auto/iamdevloper');
+  assert.equal(component.get('media'), 'bestest_user');
 });
 
-test('src in null when one of namespace or network or user is empty', function(assert) {
-  assert.expect(3);
-
-  var component = this.subject();
-
-  /** Test #1 */
-  component.setProperties({
-    namespace: '',
-    network: 'twitter_name',
-    user: 'iamdevloper'
-  });
-
-  assert.equal(component.get('src'), null);
-
-  /** Test #2 */
-  component.setProperties({
-    namespace: 'happysale',
-    network: '',
-    user: 'iamdevloper'
-  });
-
-  assert.equal(component.get('src'), null);
-
-  /** Test #3 */
-  component.setProperties({
-    namespace: 'happysale',
-    network: 'twitter_name',
-    user: ''
-  });
-
-  assert.equal(component.get('src'), null);
-});
-
-test('alt applied to the DOM', function(assert) {
-  assert.expect(1);
-
-  var component = this.subject();
-  component.setProperties({
-    alt: 'this is alt',
-  });
-
-  var $component = this.render();
-
-  assert.equal($component.attr('alt'), 'this is alt');
-});
-
-test('src applied to the DOM', function(assert) {
-  assert.expect(1);
-
-  var component = this.subject();
-  component.setProperties({
-    namespace: 'happysale',
-    network: 'twitter_name',
-    user: 'iamdevloper',
-    filters: 'f_auto'
-  });
-
-  var $component = this.render();
-
-  assert.equal($component.attr('src'), '//res.cloudinary.com/happysale/image/twitter_name/f_auto/iamdevloper');
-});
-
-test('width and height applied to the DOM', function(assert) {
+test('profile getter is [network, user]', function(assert) {
   assert.expect(2);
 
   var component = this.subject();
   component.setProperties({
-    width: '100',
-    height: '200'
+    network: 'twitter_name',
+    user: 'iamdevloper'
   });
+  var profile = component.get('profile');
 
-  var $component = this.render();
-
-  assert.equal($component.attr('width'), '100');
-  assert.equal($component.attr('height'), '200');
+  assert.equal(profile[0], 'twitter_name');
+  assert.equal(profile[1], 'iamdevloper');
 });
 
-test('width and height not applied to the DOM when empty', function(assert) {
+test('profile setter changes network and user', function(assert) {
   assert.expect(2);
 
   var component = this.subject();
-  var $component = this.render();
+  component.set('profile', ['twitter_name', 'iamdevloper']);
 
-  assert.equal($component.attr('width'), undefined);
-  assert.equal($component.attr('height'), undefined);
+  assert.equal(component.get('network'), 'twitter_name');
+  assert.equal(component.get('user'), 'iamdevloper');
 });
