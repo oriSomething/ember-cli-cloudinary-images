@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-cloudinary-images",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use images from Cloudinary easily",
   "directories": {
     "doc": "doc",
