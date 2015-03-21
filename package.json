@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-cloudinary-images",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use images from Cloudinary easily",
   "directories": {
     "doc": "doc",
@@ -11,7 +11,10 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HappySale/ember-cli-cloudinary-images"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
