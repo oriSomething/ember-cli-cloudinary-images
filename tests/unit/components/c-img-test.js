@@ -151,6 +151,22 @@ test('width and height applied to the DOM', function(assert) {
   assert.equal($component.attr('height'), '200');
 });
 
+test('width and height applied to the DOM when using percentage value', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject();
+  component.setProperties({
+    width: '100%',
+    height: '50%'
+  });
+
+  this.render();
+  var $component = this.$();
+
+  assert.equal($component.attr('width'), '100%');
+  assert.equal($component.attr('height'), '50%');
+});
+
 test('width and height not applied to the DOM when empty', function(assert) {
   assert.expect(2);
 
