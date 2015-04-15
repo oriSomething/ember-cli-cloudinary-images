@@ -104,6 +104,20 @@ test('src has correct result with filters', function(assert) {
   assert.equal(component.get('src'), '//res.cloudinary.com/happysale/image/upload/f_auto/cdn/common/logo');
 });
 
+test('src has correct result with version', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.setProperties({
+    account: 'happysale',
+    media: 'cdn/common/logo',
+    version: '1423562701',
+    filters: 'f_auto'
+  });
+
+  assert.equal(component.get('src'), '//res.cloudinary.com/happysale/image/upload/f_auto/v1423562701/cdn/common/logo');
+});
+
 test('src in null when account or namespace or media is empty', function(assert) {
   assert.expect(4);
 
