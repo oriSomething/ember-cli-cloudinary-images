@@ -49,6 +49,20 @@ test('allFilters includes w and h', function(assert) {
   assert.equal(component.get('allFilters'), 'fl_progressive,w_100,h_50');
 });
 
+test('src prefer cdn than account attribute', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.setProperties({
+    cdn: 'www.cdn.com',
+    account: 'happysale',
+    media: 'cdn/common/logo',
+    filters: ''
+  });
+
+  assert.equal(component.get('src'), '//www.cdn.com/image/upload/cdn/common/logo');
+});
+
 test('src has correct result without filters', function(assert) {
   assert.expect(1);
 
@@ -76,12 +90,13 @@ test('src has correct result with filters', function(assert) {
 });
 
 test('src in null when account or namespace or media is empty', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
 
   var component = this.subject();
 
   /** Test #1 */
   component.setProperties({
+    cdn: '',
     account: '',
     namespace: 'upload',
     media: 'cdn/common/logo'
@@ -90,6 +105,7 @@ test('src in null when account or namespace or media is empty', function(assert)
 
   /** Test #2 */
   component.setProperties({
+    cdn: '',
     account: 'happysale',
     namespace: '',
     media: 'cdn/common/logo'
@@ -98,11 +114,21 @@ test('src in null when account or namespace or media is empty', function(assert)
 
   /** Test #3 */
   component.setProperties({
+    cdn: '',
     account: 'happysale',
     namespace: 'upload',
     media: ''
   });
   assert.equal(component.get('src'), null);
+
+  /** Test #4 */
+  component.setProperties({
+    cdn: 'www.cdn.com',
+    account: '',
+    namespace: 'upload',
+    media: 'cdn/common/logo'
+  });
+  assert.notEqual(component.get('src'), null);
 });
 
 test('src applied to the DOM', function(assert) {

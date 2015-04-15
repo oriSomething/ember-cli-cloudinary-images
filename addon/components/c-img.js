@@ -27,6 +27,8 @@ export default Ember.Component.extend({
   height: null,
 
   /** @type {String} The user's account name in Cloudinary */
+  cdn: '',
+  /** @type {String} The user's account name in Cloudinary */
   account: '',
   /** @type {String} The source of image. "upload" or social networks such as "facebook" */
   namespace: 'upload',
@@ -61,19 +63,23 @@ export default Ember.Component.extend({
   }),
 
   /** @type {String} HTML src attribute */
-  src: computed('account', 'namespace', 'media', 'allFilters', function() {
+  src: computed('cdn', 'account', 'namespace', 'media', 'allFilters', function() {
     const {
+      cdn,
       account,
       namespace,
       media,
       allFilters
-    } = this.getProperties('account', 'namespace', 'media', 'allFilters');
+    } = this.getProperties('cdn', 'account', 'namespace', 'media', 'allFilters');
 
     /** Makes sure that unneeded request won't be happened */
-    if (isEmpty(namespace) || isEmpty(account) || isEmpty(media)) {
+    if (isEmpty(namespace) || (isEmpty(account) && isEmpty(cdn)) || isEmpty(media)) {
       return null;
     }
 
-    return `//res.cloudinary.com/${account}/image/${namespace}/${allFilters}${allFilters ? '/' : ''}${media}`;
+    /** @type {String} URL's domain */
+    const domain = isEmpty(cdn) ? 'res.cloudinary.com' : cdn;
+
+    return `//${domain}${cdn ? '' : '/' + account}/image/${namespace}/${allFilters}${allFilters ? '/' : ''}${media}`;
   })
 });
