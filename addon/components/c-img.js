@@ -42,7 +42,7 @@ export default Ember.Component.extend({
   w: 0,
   /** @type {String} Version of media */
   version: '',
-  /** @type {String} The media id in Cloudinary */
+  /** @type {String} The public id in Cloudinary */
   media: '',
 
   /**
