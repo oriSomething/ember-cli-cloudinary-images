@@ -63,6 +63,21 @@ test('src prefer cdn than account attribute', function(assert) {
   assert.equal(component.get('src'), '//www.cdn.com/image/upload/cdn/common/logo');
 });
 
+test('protocol added when defined', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.setProperties({
+    protocol: 'https',
+    cdn: 'www.cdn.com',
+    account: 'happysale',
+    media: 'cdn/common/logo',
+    filters: ''
+  });
+
+  assert.equal(component.get('src'), 'https://www.cdn.com/image/upload/cdn/common/logo');
+});
+
 test('src has correct result without filters', function(assert) {
   assert.expect(1);
 

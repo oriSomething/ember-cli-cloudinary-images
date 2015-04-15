@@ -26,6 +26,8 @@ export default Ember.Component.extend({
   /** @type {String|Null} Null to prevent 0 value in HTML attribute */
   height: null,
 
+  /** @type {String} Protocol: HTTP or HTTPS or empty */
+  protocol: '',
   /** @type {String} The user's domain for Cloudinary images if exists */
   cdn: '',
   /** @type {String} The user's account name in Cloudinary */
@@ -63,14 +65,15 @@ export default Ember.Component.extend({
   }),
 
   /** @type {String} HTML src attribute */
-  src: computed('cdn', 'account', 'namespace', 'media', 'allFilters', function() {
+  src: computed('protocol', 'cdn', 'account', 'namespace', 'media', 'allFilters', function() {
     const {
+      protocol,
       cdn,
       account,
       namespace,
       media,
       allFilters
-    } = this.getProperties('cdn', 'account', 'namespace', 'media', 'allFilters');
+    } = this.getProperties('protocol', 'cdn', 'account', 'namespace', 'media', 'allFilters');
 
     /** Makes sure that unneeded request won't be happened */
     if (isEmpty(namespace) || (isEmpty(account) && isEmpty(cdn)) || isEmpty(media)) {
@@ -80,6 +83,6 @@ export default Ember.Component.extend({
     /** @type {String} URL's domain */
     const domain = isEmpty(cdn) ? 'res.cloudinary.com' : cdn;
 
-    return `//${domain}${cdn ? '' : '/' + account}/image/${namespace}/${allFilters}${allFilters ? '/' : ''}${media}`;
+    return `${protocol ? protocol + ':' : ''}//${domain}${cdn ? '' : '/' + account}/image/${namespace}/${allFilters}${allFilters ? '/' : ''}${media}`;
   })
 });
