@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   /** @type {String|Null} Null to prevent 0 value in HTML attribute */
   height: null,
 
-  /** @type {String} The user's account name in Cloudinary */
+  /** @type {String} The user's domain for Cloudinary images if exists */
   cdn: '',
   /** @type {String} The user's account name in Cloudinary */
   account: '',
