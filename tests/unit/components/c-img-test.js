@@ -135,6 +135,20 @@ test('alt applied to the DOM', function(assert) {
   assert.equal($component.attr('alt'), 'this is alt');
 });
 
+test('title applied to the DOM', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject();
+  component.setProperties({
+    title: 'this is title',
+  });
+
+  this.render();
+  var $component = this.$();
+
+  assert.equal($component.attr('title'), 'this is title');
+});
+
 test('width and height applied to the DOM', function(assert) {
   assert.expect(2);
 

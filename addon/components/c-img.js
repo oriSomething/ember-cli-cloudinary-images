@@ -13,12 +13,14 @@ export const DEFAULT_FILTERS = 'f_auto';
 export default Ember.Component.extend({
   layout: layout,
   /** @type {Array} HTML attributes binding */
-  attributeBindings: ['width', 'height', 'src', 'alt'],
+  attributeBindings: ['width', 'height', 'src', 'alt', 'title'],
   /** @type {String} The HTML Tag */
   tagName: 'img',
 
   /** @type {String|Null} Null to prevent empty value in HTML attribute */
   alt: null,
+  /** @type {String|Null} Null to prevent empty value in HTML attribute */
+  title: null,
   /** @type {String|Null} Null to prevent 0 value in HTML attribute */
   width: null,
   /** @type {String|Null} Null to prevent 0 value in HTML attribute */
