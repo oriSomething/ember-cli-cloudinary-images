@@ -43,3 +43,10 @@ export default {
   initialize: initialize
 };
 ```
+
+### More properties
+
+- `version` for choosing version of the asset
+- `protocol` for choosing protocol (`http`/`https`)
+- `cdn` if you have a custom URL instead of using Cloudinary's URL
+
