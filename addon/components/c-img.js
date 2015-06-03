@@ -52,44 +52,48 @@ export default Ember.Component.extend({
    * @property allFilters
    * @type {String}
    */
-  allFilters: computed('filters', 'h', 'w', function() {
-    const { h, w } = this.getProperties('h', 'w');
-    let filters = this.get('filters') || '';
+  allFilters: computed('filters', 'h', 'w', {
+    get() {
+      const { h, w } = this.getProperties('h', 'w');
+      let filters = this.get('filters') || '';
 
-    if (typeOf(filters) === 'array') {
-      filters = filters.join(',');
+      if (typeOf(filters) === 'array') {
+        filters = filters.join(',');
+      }
+
+      if (w > 0) { filters = `${filters},w_${w}`; }
+      if (h > 0) { filters = `${filters},h_${h}`; }
+
+      return filters;
     }
-
-    if (w > 0) { filters = `${filters},w_${w}`; }
-    if (h > 0) { filters = `${filters},h_${h}`; }
-
-    return filters;
   }),
 
   /** @type {String} HTML src attribute */
-  src: computed('protocol', 'cdn', 'account', 'namespace', 'version', 'media', 'allFilters', function() {
-    const {
-      protocol,
-      cdn,
-      account,
-      namespace,
-      media,
-      version,
-      allFilters
-    } = this.getProperties('protocol', 'cdn', 'account', 'namespace', 'version', 'media', 'allFilters');
+  src: computed('protocol', 'cdn', 'account', 'namespace', 'version', 'media', 'allFilters', {
+    get() {
+      const {
+        protocol,
+        cdn,
+        account,
+        namespace,
+        media,
+        version,
+        allFilters
+      } = this.getProperties('protocol', 'cdn', 'account', 'namespace', 'version', 'media', 'allFilters');
 
-    /** Makes sure that unneeded request won't be happened */
-    if (isEmpty(namespace) || (isEmpty(account) && isEmpty(cdn)) || isEmpty(media)) {
-      return null;
+      /** Makes sure that unneeded request won't be happened */
+      if (isEmpty(namespace) || (isEmpty(account) && isEmpty(cdn)) || isEmpty(media)) {
+        return null;
+      }
+
+      /** @type {String} URL's domain */
+      const domain = isEmpty(cdn) ? 'res.cloudinary.com' : cdn;
+
+      return `${protocol}${protocol ? ':' : ''}//` +
+        `${domain}${cdn ? '' : '/' + account}/image/` +
+        `${namespace}` +
+        `${allFilters ? '/' : ''}${allFilters}` +
+        `${version ? '/v' : ''}${version}/${media}`;
     }
-
-    /** @type {String} URL's domain */
-    const domain = isEmpty(cdn) ? 'res.cloudinary.com' : cdn;
-
-    return `${protocol}${protocol ? ':' : ''}//` +
-      `${domain}${cdn ? '' : '/' + account}/image/` +
-      `${namespace}` +
-      `${allFilters ? '/' : ''}${allFilters}` +
-      `${version ? '/v' : ''}${version}/${media}`;
   })
 });

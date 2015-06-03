@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import layout from '../templates/components/c-avatar';
 import CImg from './c-img';
-const { computed } = Ember;
+const {
+  assert,
+  computed
+} = Ember;
 
 /** @type {Ember.Component} */
 export default CImg.extend({
@@ -22,18 +25,25 @@ export default CImg.extend({
   /** @type {String} User id in network */
   user: computed.alias('media'),
   /** @type {Array} User id in network */
-  profile: computed('network', 'user', function(key, value) {
-    /** Setter */
-    if (Ember.isArray(value)) {
+  profile: computed('network', 'user', {
+    get() {
+      const { network, user } = this.getProperties('network', 'user');
+
+      return Ember.A([network, user]);
+    },
+
+    set(key, value) {
+      assert(`profile value is ${typeof value} instead of Array of String`, Ember.isArray(value));
+      assert(`profile value.length is ${value.length} instead of 2`, value.length === 2);
+
+      const [network, user] = value;
+
       this.setProperties({
-        network: value[0],
-        user: value[1]
+        network,
+        user
       });
+
+      return this.get('profile');
     }
-
-    /** Getter */
-    let { network, user } = this.getProperties('network', 'user');
-
-    return Ember.A([network, user]);
   })
 });
