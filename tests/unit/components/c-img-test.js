@@ -209,15 +209,15 @@ test('width and height applied to the DOM', function(assert) {
 
   var component = this.subject();
   component.setProperties({
-    width: '100',
-    height: '200'
+    width: 100,
+    height: 200
   });
 
   this.render();
   var $component = this.$();
 
-  assert.equal($component.attr('width'), '100');
-  assert.equal($component.attr('height'), '200');
+  assert.equal($component.attr('width'), 100);
+  assert.equal($component.attr('height'), 200);
 });
 
 test('width and height not applied to the DOM when empty', function(assert) {

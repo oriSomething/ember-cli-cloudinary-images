@@ -21,9 +21,9 @@ export default Ember.Component.extend({
   alt: null,
   /** @type {String|Null} Null to prevent empty value in HTML attribute */
   title: null,
-  /** @type {String|Null} Null to prevent 0 value in HTML attribute */
+  /** @type {Number|Null} Null to prevent 0 value in HTML attribute */
   width: null,
-  /** @type {String|Null} Null to prevent 0 value in HTML attribute */
+  /** @type {Number|Null} Null to prevent 0 value in HTML attribute */
   height: null,
 
   /** @type {String} Protocol: HTTP or HTTPS or empty */
