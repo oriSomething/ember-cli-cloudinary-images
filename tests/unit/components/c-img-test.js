@@ -223,7 +223,7 @@ test('width and height applied to the DOM', function(assert) {
 test('width and height not applied to the DOM when empty', function(assert) {
   assert.expect(2);
 
-  var component = this.subject();
+  this.subject();
   this.render();
   var $component = this.$();
 
