@@ -3,7 +3,8 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('c-avatar', {
+moduleForComponent('c-avatar', 'Unit | Helper | c avatar', {
+  needs: []
 });
 
 test('it renders', function(assert) {

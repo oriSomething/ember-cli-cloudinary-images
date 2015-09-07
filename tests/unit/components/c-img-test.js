@@ -3,7 +3,8 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('c-img', {
+moduleForComponent('c-img', 'Unit | Helper | c-img', {
+  needs: []
 });
 
 test('it renders', function(assert) {
