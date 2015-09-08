@@ -19,7 +19,24 @@ module('Unit | Initializer | cloudinary', {
   }
 });
 
-test('it works even when no environment set', function(assert) {
+test('it exists', function(assert) {
   initialize(registry, application);
+
   assert.ok('cloudinary-config:main' in registry.registrations);
 });
+
+test('there are default properties', function(assert) {
+  initialize(registry, application);
+  const config = application.__container__.lookup('cloudinary-config:main');
+
+  assert.ok('API_KEY' in config, 'API_KEY exists in config');
+  assert.ok('CDN_DISTRIBUTION' in config, 'CDN_DISTRIBUTION exists in config');
+  assert.ok('CLOUD_NAME' in config, 'CLOUD_NAME exists in config');
+  assert.ok('CONCATENATED_TRANSFORMS' in config, 'CONCATENATED_TRANSFORMS exists in config');
+  assert.ok('DEFAULT_IMAGE_FORMAT' in config, 'DEFAULT_IMAGE_FORMAT exists in config');
+  assert.ok('DEFAULT_TRANSFORMS' in config, 'DEFAULT_TRANSFORMS exists in config');
+  assert.ok('DOMAIN' in config, 'DOMAIN exists in config');
+  assert.ok('SECURE' in config, 'SECURE exists in config');
+  assert.ok('SUB_DOMAIN' in config, 'SUB_DOMAIN exists in config');
+});
+
