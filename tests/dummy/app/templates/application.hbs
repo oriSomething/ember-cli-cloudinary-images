@@ -1,19 +1,100 @@
 <h2 id="title">Ember CLI Cloudinary Images</h2>
 
-{{c-img cdn="images.happysale.com" media="cdn/common/logo"}}
+<img src={{cloudinary-url 'cdn/common/logo'}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo'}}
+  <br>
+  regular
+</small>
 <hr>
 
-{{c-img protocol="https" account="happysale" version="1423562701" media="cdn/common/logo"}}
+<img src={{cloudinary-url 'cdn/common/logo' cdnDistribution=true}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' cdnDistribution=true}}
+  <br>
+  cdn distribution regular
+</small>
 <hr>
 
-{{c-img account="happysale" w="100" media="cdn/common/logo"}}
+<img src={{cloudinary-url 'cdn/common/logo' secure=true}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' secure=true}}
+  <br>
+  secure
+</small>
 <hr>
 
-{{c-img account="happysale" namespace="twitter_name" w="100" media="iamdevloper"}}
+<img src={{cloudinary-url 'cdn/common/logo' subDomain='happysale'}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' subDomain='happysale'}}
+  <br>
+  sub-domain
+</small>
 <hr>
 
-{{c-img account="happysale" namespace="twitter_name" w="100" filters="r_10" media="iamdevloper"}}
+<img src={{cloudinary-url 'cdn/common/logo' subDomain='happysale' cdnDistribution=true}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' subDomain='happysale' cdnDistribution=true}}
+  <br>
+  cdn distribution sub-domain
+</small>
 <hr>
 
-{{c-avatar account="happysale" network="twitter_name" user="iamdevloper"}}
+<img src={{cloudinary-url 'cdn/common/logo' subDomain='images' domain='happysale.com'}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' subDomain='images' domain='happysale.com'}}
+  <br>
+  domain
+</small>
+<hr>
+
+<img src={{cloudinary-url 'cdn/common/logo' subDomain='images' domain='happysale.com' cdnDistribution=true}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' subDomain='images' domain='happysale.com' cdnDistribution=true}}
+  <br>
+  cdn distribution domain
+</small>
+<hr>
+
+<img src={{cloudinary-url 'cdn/common/logo' width=155 height=50}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' width=155 height=50}}
+  <br>
+  size
+</small>
+<hr>
+
+<img src={{cloudinary-url 'cdn/common/logo' transforms='e_sepia'}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' transforms='e_sepia'}}
+  <br>
+  transforms
+</small>
+<hr>
+
+<img src={{cloudinary-url 'cdn/common/logo' format='svg'}}>
+<br>
+<small>
+  {{cloudinary-url 'cdn/common/logo' format='svg'}}
+  <br>
+  format
+</small>
+<hr>
+
+<img src={{cloudinary-url 'iamdevloper' type='twitter_name'}}>
+<br>
+<small>
+  {{cloudinary-url 'iamdevloper' type='twitter_name'}}
+  <br>
+  type
+</small>
 <hr>
