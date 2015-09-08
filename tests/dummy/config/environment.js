@@ -14,10 +14,11 @@ module.exports = function(environment) {
     },
 
     APP: {
-      CLOUDINARY: {
-        CLOUD_NAME: 'happysale',
-        SECURE: false
-      }
+    },
+
+    CLOUDINARY: {
+      CLOUD_NAME: 'happysale',
+      SECURE: false
     }
   };
 
