@@ -34,8 +34,7 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
     "ember-disable-prototype-extensions": "^1.0.0",
-    "ember-try": "0.0.6",
-    "object-assign": "^4.0.1"
+    "ember-try": "0.0.6"
   },
   "keywords": [
     "ember-addon",
@@ -45,7 +44,8 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.3",
-    "ember-cli-htmlbars": "0.7.9"
+    "ember-cli-htmlbars": "0.7.9",
+    "object-assign": "^4.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
