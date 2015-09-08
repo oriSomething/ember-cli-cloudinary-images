@@ -94,6 +94,11 @@ test('publicIdURLPrefix()', function(assert) {
   assert.equal(result, 'https://res.cloudinary.com/happysale', 'cloudName is in the end of the path and equal to happysale');
 
   result = service.publicIdURLPrefix('', props({
+    cloudName: ''
+  }));
+  assert.equal(result, '', 'result empty for no cloudName');
+
+  result = service.publicIdURLPrefix('', props({
     secure: false
   }));
   assert.equal(result, 'http://res.cloudinary.com/happysale', 'secure false to http');

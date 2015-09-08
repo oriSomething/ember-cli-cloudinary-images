@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed } = Ember;
+const { computed, Logger } = Ember;
 
 /** @const {String} Default fallback domain */
 export const CLOUDINARY_DOMAIN = 'cloudinary.com';
@@ -150,6 +150,11 @@ export default Ember.Service.extend({
     cdnDistribution = this.get('cdnDistribution'),
     secure = this.get('secure')
   } = {}) {
+    if (!cloudName) {
+      Logger.warn('There is no `cloudName`');
+      return '';
+    }
+
     domain = domain || CLOUDINARY_DOMAIN;
     /** @constant {String} */
     const protocol = secure ? 'https://' : 'http://';
