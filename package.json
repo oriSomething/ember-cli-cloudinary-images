@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HappySale/ember-cli-cloudinary-images"
+    "url": "https://github.com/oriSomething/ember-cli-cloudinary-images"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "ori livni<ori@happysale.com>",
+  "author": "ori livni",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
