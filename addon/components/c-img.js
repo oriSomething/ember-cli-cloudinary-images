@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/c-img';
 const {
   computed,
+  deprecate,
   typeOf,
   isEmpty
 } = Ember;
@@ -12,6 +13,21 @@ export const DEFAULT_FILTERS = 'f_auto';
 /** @type {Ember.Component} */
 export default Ember.Component.extend({
   layout: layout,
+
+  init() {
+    this._super(...arguments);
+
+    deprecate(
+      'Using {{c-img}} or {{c-avatar}} was deprecated in favor of {{cloudinary-url}} helper',
+      false,
+      {
+        id: 'ember-cli-cloudinary-images.deprecated-components',
+        until: '0.6.0',
+        url: 'https://github.com/oriSomething/ember-cli-cloudinary-images#deprecations'
+      }
+    );
+  },
+
   /** @type {Array} HTML attributes binding */
   attributeBindings: ['width', 'height', 'src', 'alt', 'title'],
   /** @type {String} The HTML Tag */
