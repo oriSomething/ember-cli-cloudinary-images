@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed, inject } = Ember;
+const { computed, inject, typeOf } = Ember;
 
 
 export default Ember.Helper.extend({
@@ -32,24 +32,32 @@ export default Ember.Helper.extend({
    * @param  {String[]}        hash.transforms
    * @return {String}                               URL for image
    */
-  compute([publicId = ''] = [], {
-    cloudName,
-    width,
-    height,
-    version,
-    domain,
-    subDomain,
-    cdnDistribution,
-    secure,
-    resourceType = 'image',
-    type = 'upload',
-    format = this.get('defaultImageFormat'),
-    transforms = this.get('defaultTransforms')
-  } = {}) {
+  compute([publicId] = [], hash = {}) {
     /** @validation */
     if (!publicId) {
       return '';
     }
+
+    let {
+      cloudName,
+      width,
+      height,
+      version,
+      domain,
+      subDomain,
+      cdnDistribution,
+      secure,
+      resourceType,
+      type,
+      format,
+      transforms
+    } = hash;
+    // Default params
+    if (typeOf(resourceType) === 'undefined') { resourceType = 'image'; }
+    if (typeOf(type) === 'undefined') { type = 'upload'; }
+    if (typeOf(format) === 'undefined') { format = this.get('defaultImageFormat'); }
+    if (typeOf(transforms) === 'undefined') { transforms = this.get('defaultTransforms'); }
+
 
     /** @type {String[]} Transforms to concatenate */
     const concatenatedTransforms = this.get('concatenatedTransforms');
@@ -58,9 +66,9 @@ export default Ember.Helper.extend({
     /** Adds concatenated transforms **/
     transforms = concatenatedTransforms.concat(transforms);
     /** Adds width if exists **/
-    transforms = width || width == 0 ? [`w_${width}`].concat(transforms) : transforms;
+    transforms = width || width === 0 ? [`w_${width}`].concat(transforms) : transforms;
     /** Adds height if exists **/
-    transforms = height || height == 0 ? [`h_${height}`].concat(transforms) : transforms;
+    transforms = height || height === 0 ? [`h_${height}`].concat(transforms) : transforms;
 
     /** Encoding */
     publicId = encodeURIComponent(decodeURIComponent(publicId)).replace(/%3A/g, ":").replace(/%2F/g, "/");

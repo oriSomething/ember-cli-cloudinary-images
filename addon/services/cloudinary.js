@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed, Logger } = Ember;
+const { computed, Logger, typeOf } = Ember;
 
 /** @const {String} Default fallback domain */
 export const CLOUDINARY_DOMAIN = 'cloudinary.com';
@@ -143,13 +143,14 @@ export default Ember.Service.extend({
    * @param  {Boolean} options.secure          [=true] Use HTTPs or HTTP
    * @return {String}                          URL
    */
-  publicIdURLPrefix(publicIdIncludeFormat = '', {
-    cloudName = this.get('cloudName'),
-    subDomain = this.get('subDomain'),
-    domain = this.get('domain'),
-    cdnDistribution = this.get('cdnDistribution'),
-    secure = this.get('secure')
-  } = {}) {
+  publicIdURLPrefix(publicIdIncludeFormat = '', options = {}) {
+    let { cloudName, subDomain, domain, cdnDistribution, secure } = options;
+    if (typeOf(cloudName) === 'undefined') { cloudName = this.get('cloudName'); }
+    if (typeOf(subDomain) === 'undefined') { subDomain = this.get('subDomain'); }
+    if (typeOf(domain) === 'undefined') { domain = this.get('domain'); }
+    if (typeOf(cdnDistribution) === 'undefined') { cdnDistribution = this.get('cdnDistribution'); }
+    if (typeOf(secure) === 'undefined') { secure = this.get('secure'); }
+
     if (!cloudName) {
       Logger.warn('There is no `cloudName`');
       return '';
