@@ -3,13 +3,12 @@ const { run } = Ember;
 import { initialize } from '../../../initializers/cloudinary';
 import { module, test } from 'qunit';
 
-let registry, application;
+let application;
 
 module('Unit | Initializer | cloudinary', {
   beforeEach() {
     run(function() {
       application = Ember.Application.create();
-      registry = application.registry;
       application.deferReadiness();
     });
   },
@@ -20,14 +19,15 @@ module('Unit | Initializer | cloudinary', {
 });
 
 test('it exists', function(assert) {
-  initialize(registry, application);
+  initialize(application);
 
-  assert.ok('cloudinary-config:main' in registry.registrations);
+  const isRegistered = application.hasRegistration('cloudinary-config:main');
+  assert.ok(isRegistered, '`cloudinary-config:main` is not registered');
 });
 
 test('there are default properties', function(assert) {
-  initialize(registry, application);
-  const config = application.__container__.lookup('cloudinary-config:main');
+  initialize(application);
+  const config = application.resolveRegistration('cloudinary-config:main');
 
   assert.ok('API_KEY' in config, 'API_KEY exists in config');
   assert.ok('CDN_DISTRIBUTION' in config, 'CDN_DISTRIBUTION exists in config');
@@ -39,4 +39,3 @@ test('there are default properties', function(assert) {
   assert.ok('SECURE' in config, 'SECURE exists in config');
   assert.ok('SUB_DOMAIN' in config, 'SUB_DOMAIN exists in config');
 });
-

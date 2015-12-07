@@ -1,6 +1,6 @@
 import config from '../config/environment';
 
-export function initialize(container, application) {
+export function initialize(application) {
   /** @constant {Object} Config from environment */
   const CLOUDINARY = config.CLOUDINARY || {};
 
