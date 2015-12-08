@@ -1,13 +1,11 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import { skip } from 'qunit';
 
 moduleForComponent('c-avatar', 'Unit | Helper | c avatar', {
   needs: []
 });
 
-test('it renders', function(assert) {
+skip('it renders', function(assert) {
   assert.expect(2);
 
   // creates the component instance
@@ -19,7 +17,7 @@ test('it renders', function(assert) {
   assert.equal(component._state, 'inDOM');
 });
 
-test('network is alias of namespace', function(assert) {
+skip('network is alias of namespace', function(assert) {
   assert.expect(1);
 
   var component = this.subject();
@@ -28,7 +26,7 @@ test('network is alias of namespace', function(assert) {
   assert.equal(component.get('namespace'), 'bestest_network');
 });
 
-test('user is alias of media', function(assert) {
+skip('user is alias of media', function(assert) {
   assert.expect(1);
 
   var component = this.subject();
@@ -37,7 +35,7 @@ test('user is alias of media', function(assert) {
   assert.equal(component.get('media'), 'bestest_user');
 });
 
-test('profile getter is [network, user]', function(assert) {
+skip('profile getter is [network, user]', function(assert) {
   assert.expect(2);
 
   var component = this.subject();
@@ -51,7 +49,7 @@ test('profile getter is [network, user]', function(assert) {
   assert.equal(profile[1], 'iamdevloper');
 });
 
-test('profile setter changes network and user', function(assert) {
+skip('profile setter changes network and user', function(assert) {
   assert.expect(2);
 
   var component = this.subject();
