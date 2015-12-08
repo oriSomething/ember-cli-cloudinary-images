@@ -1,4 +1,4 @@
-# Ember-cli-cloudinary-images
+# Ember-cli-cloudinary-images [![Build Status](https://travis-ci.org/oriSomething/ember-cli-cloudinary-images.svg)](https://travis-ci.org/oriSomething/ember-cli-cloudinary-images)
 
 This addon contains a helper to get images URLs from [Cloudinary](http://cloudinary.com/) easy.
 Made by [HappySale](http://www.happysale.com/)

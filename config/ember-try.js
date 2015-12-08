@@ -8,7 +8,7 @@ module.exports = {
     {
       name: 'ember-release',
       dependencies: {
-        'ember': 'components/ember#release'
+        'ember': 'components/ember#2'
       },
       resolutions: {
         'ember': 'release'
