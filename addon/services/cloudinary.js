@@ -196,7 +196,7 @@ export default Ember.Service.extend({
   defaultImageFormat: computed.readOnly('config.DEFAULT_IMAGE_FORMAT'),
 
   /**
-   * @method cloudinaryUrl
+   * @method computeUrl
    * @param  {String}          [publicId]           Public id of image in Cloudinary
    * @param  {String}          hash.format          File extension)
    * @param  {String}          hash.cloudName
@@ -211,7 +211,7 @@ export default Ember.Service.extend({
    * @param  {String[]}        hash.transforms
    * @return {String}                               URL for image
    */
-  cloudinaryUrl([publicId] = [], hash = {}) {
+  computeUrl([publicId] = [], hash = {}) {
     /** @validation */
     if (!publicId) {
       return '';

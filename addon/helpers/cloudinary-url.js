@@ -23,6 +23,6 @@ export default Ember.Helper.extend({
    */
   compute() {
     console.log(JSON.stringify(arguments, null, 2)) ;
-    return this.get('cloudinary').cloudinaryUrl(arguments) ;
+    return this.get('cloudinary').computeUrl(arguments) ;
   }
 });
