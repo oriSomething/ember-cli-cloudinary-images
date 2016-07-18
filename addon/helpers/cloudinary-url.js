@@ -22,6 +22,6 @@ export default Ember.Helper.extend({
    * @return {String}                               URL for image
    */
   compute(publicId, hash) {
-    return this.get('cloudinary').computeUrl(publicId, hash) ;
+    return this.get('cloudinary').computeUrl([publicId], hash) ;
   }
 });

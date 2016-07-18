@@ -211,7 +211,7 @@ export default Ember.Service.extend({
    * @param  {String[]}        hash.transforms
    * @return {String}                               URL for image
    */
-  computeUrl([publicId] = [], hash = {}) {
+  computeUrl(publicId = [], hash = {}) {
     /** @validation */
     if (!publicId) {
       return '';
