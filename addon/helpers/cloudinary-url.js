@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed, inject, typeOf } = Ember;
+const { inject, typeOf } = Ember;
 
 
 export default Ember.Helper.extend({
@@ -22,6 +22,6 @@ export default Ember.Helper.extend({
    * @return {String}                               URL for image
    */
   compute(publicId, hash) {
-    return this.get('cloudinary').computeUrl([publicId], hash) ;
+    return this.get('cloudinary').getURL([publicId], hash) ;
   }
 });

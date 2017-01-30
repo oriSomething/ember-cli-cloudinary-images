@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed, Logger, typeOf } = Ember;
+const { computed, Logger, typeOf, isEmpty } = Ember;
 
 /** @const {String} Default fallback domain */
 export const CLOUDINARY_DOMAIN = 'cloudinary.com';
@@ -184,19 +184,15 @@ export default Ember.Service.extend({
   },
 
 
-  /** @property {String[]} concatenatedTransforms */
-  concatenatedTransforms: computed('config.CONCATENATED_TRANSFORMS', function() {
+  /** @property {String[]} _concatenatedTransforms */
+  _concatenatedTransforms: computed('config.CONCATENATED_TRANSFORMS', function() {
     // Protection from Strings
     const concatenatedTransforms = this.get('config.CONCATENATED_TRANSFORMS') || [];
     return Array.isArray(concatenatedTransforms) ? concatenatedTransforms : [concatenatedTransforms];
   }),
-  /** @property {String[]} defaultTransforms */
-  defaultTransforms: computed.readOnly('config.DEFAULT_TRANSFORMS'),
-  /** @property {String} defaultImageFormat */
-  defaultImageFormat: computed.readOnly('config.DEFAULT_IMAGE_FORMAT'),
 
   /**
-   * @method computeUrl
+   * @method getURL
    * @param  {String}          [publicId]           Public id of image in Cloudinary
    * @param  {String}          hash.format          File extension)
    * @param  {String}          hash.cloudName
@@ -211,9 +207,9 @@ export default Ember.Service.extend({
    * @param  {String[]}        hash.transforms
    * @return {String}                               URL for image
    */
-  computeUrl(publicId = [], hash = {}) {
+  getURL(publicId = [], hash = {}) {
     /** @validation */
-    if (!publicId) {
+    if ( isEmpty(publicId) ) {
       return '';
     }
 
@@ -234,12 +230,11 @@ export default Ember.Service.extend({
     // Default params
     if (typeOf(resourceType) === 'undefined') { resourceType = 'image'; }
     if (typeOf(type) === 'undefined') { type = 'upload'; }
-    if (typeOf(format) === 'undefined') { format = this.get('defaultImageFormat'); }
-    if (typeOf(transforms) === 'undefined') { transforms = this.get('defaultTransforms'); }
-
+    if (typeOf(format) === 'undefined') { format = this.get('config.DEFAULT_IMAGE_FORMAT'); }
+    if (typeOf(transforms) === 'undefined') { transforms = this.get('DEFAULT_TRANSFORMS'); }
 
     /** @type {String[]} Transforms to concatenate */
-    const concatenatedTransforms = this.get('concatenatedTransforms');
+    const concatenatedTransforms = this.get('_concatenatedTransforms');
     /** Convert transforms to array if the given param was string **/
     transforms = Array.isArray(transforms) ? transforms : transforms || [];
     /** Adds concatenated transforms **/
