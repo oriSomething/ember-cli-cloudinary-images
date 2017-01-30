@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject, isEmpty } = Ember;
+const { inject } = Ember;
 
 
 export default Ember.Helper.extend({
@@ -23,7 +23,8 @@ export default Ember.Helper.extend({
    */
   compute(publicId, hash) {
     /** @validation */
-    if ( isEmpty(publicId) ) {
+    if ( isEmpty(publicId) ||
+        (Array.isArray(publicId) && publicId.length === 1 && !publicId[0]) {
       return '';
     }
     return this.get('cloudinary').getURL([publicId], hash) ;
