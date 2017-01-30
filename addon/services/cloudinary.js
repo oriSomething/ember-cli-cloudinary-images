@@ -231,7 +231,7 @@ export default Ember.Service.extend({
     if (typeOf(resourceType) === 'undefined') { resourceType = 'image'; }
     if (typeOf(type) === 'undefined') { type = 'upload'; }
     if (typeOf(format) === 'undefined') { format = this.get('config.DEFAULT_IMAGE_FORMAT'); }
-    if (typeOf(transforms) === 'undefined') { transforms = this.get('DEFAULT_TRANSFORMS'); }
+    if (typeOf(transforms) === 'undefined') { transforms = this.get('config.DEFAULT_TRANSFORMS'); }
 
     /** @type {String[]} Transforms to concatenate */
     const concatenatedTransforms = this.get('_concatenatedTransforms');
