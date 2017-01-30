@@ -24,7 +24,8 @@ export default Ember.Helper.extend({
   compute(publicId, hash) {
     /** @validation */
     if ( isEmpty(publicId) ||
-        (Array.isArray(publicId) && publicId.length === 1 && !publicId[0]) {
+        (Array.isArray(publicId) && publicId.length === 1 && !publicId[0])
+    ) {
       return '';
     }
     return this.get('cloudinary').getURL([publicId], hash) ;
