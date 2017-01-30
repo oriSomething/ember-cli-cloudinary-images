@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject } = Ember;
+const { inject, isEmpty } = Ember;
 
 
 export default Ember.Helper.extend({
