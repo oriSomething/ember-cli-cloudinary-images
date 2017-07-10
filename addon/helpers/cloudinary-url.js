@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject, isEmpty } = Ember;
+const { inject } = Ember;
 
 
 export default Ember.Helper.extend({
@@ -19,15 +19,13 @@ export default Ember.Helper.extend({
    * @param  {Boolean}         hash.secure
    * @param  {String}          hash.type
    * @param  {String[]}        hash.transforms
-   * @return {String}                               URL for image
+   * @return {String}          URL for image
    */
-  compute(publicId, hash) {
+  compute([publicId] = [], hash = {}) {
     /** @validation */
-    if ( isEmpty(publicId) ||
-        (Array.isArray(publicId) && publicId.length === 1 && !publicId[0])
-    ) {
-      return '';
+    if ( !publicId ) {
+      return '' ;
     }
-    return this.get('cloudinary').getURL([publicId], hash) ;
+    return this.get('cloudinary').getURL(publicId, hash) ;
   }
 });

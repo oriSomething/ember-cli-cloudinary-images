@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { computed, Logger, typeOf, isEmpty } = Ember;
+const { computed, Logger, typeOf } = Ember;
 
 /** @const {String} Default fallback domain */
 export const CLOUDINARY_DOMAIN = 'cloudinary.com';
@@ -193,7 +193,7 @@ export default Ember.Service.extend({
 
   /**
    * @method getURL
-   * @param  {String}          [publicId]           Public id of image in Cloudinary
+   * @param  {String}          publicId           Public id of image in Cloudinary
    * @param  {String}          hash.format          File extension)
    * @param  {String}          hash.cloudName
    * @param  {(String|Number)} hash.width
@@ -207,9 +207,9 @@ export default Ember.Service.extend({
    * @param  {String[]}        hash.transforms
    * @return {String}                               URL for image
    */
-  getURL(publicId = [], hash = {}) {
+  getURL(publicId, hash = {}) {
     /** @validation */
-    if ( isEmpty(publicId) ) {
+    if ( !publicId ) {
       return '';
     }
 
