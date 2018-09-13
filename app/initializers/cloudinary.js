@@ -5,7 +5,7 @@ export function initialize(application) {
   const CLOUDINARY = config.CLOUDINARY || {};
 
   application.register('cloudinary-config:main', CLOUDINARY, { instantiate: false });
-  application.inject('service:cloudinary', 'config', 'cloudinary-config:main');
+  // application.inject('service:cloudinary', 'config', 'cloudinary-config:main');
 }
 
 export default {
